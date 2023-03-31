@@ -8,6 +8,9 @@ import {
 } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import PhoneInput from "react-native-phone-number-input";
+import { sendSmsVerification } from "../api/verify";
+
+
 
 const PhoneNumber = ({ navigation }) => {
  const [value, setValue] = useState("");
@@ -37,11 +40,12 @@ const PhoneNumber = ({ navigation }) => {
            autoFocus
          />
          <TouchableOpacity
-           style={styles.button}
-           onPress={() => {
-             // TODO - send SMS!
-           }}
-         >
+         style={styles.button}
+         onPress={() => {
+         sendSmsVerification(formattedValue).then((sent) => {
+         console.log("Sent!");
+         });
+         }}>
            <Text style={styles.buttonText}>Sign Up</Text>
          </TouchableOpacity>
        </SafeAreaView>
